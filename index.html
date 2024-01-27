@@ -3,40 +3,31 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web:-:IO:-:Net</title>
   <style>
     body {
       margin: 0;
       overflow: hidden;
-      background-color: #f0f0f0; /* Fondo colorido poco brillante */
-      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f0f0f0; /* Fondo poco brillante */
       color: #333; /* Color del texto */
+      font-family: Arial, sans-serif;
     }
 
     #textContainer {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      white-space: nowrap;
-      font-size: 2vw; /* Tamaño de texto ajustado a la ventana */
       display: flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      font-size: 2em;
     }
 
     .block {
-      margin: 0 1vw; /* Espaciado entre bloques */
+      margin: 0 5px;
       transition: transform 1s ease-in-out;
-    }
-
-    @media (orientation: portrait) {
-      #textContainer {
-        flex-direction: column;
-      }
-    }
-
-    @media (orientation: landscape) {
-      #textContainer {
-        flex-direction: row;
-      }
     }
   </style>
 </head>
@@ -44,30 +35,34 @@
   <div id="textContainer">
     <div class="block">Web</div>
     <div class="block">:-:</div>
-    <div class="block">IO</div>
+    <div class="block" id="ioBlock">IO</div>
     <div class="block">:-:</div>
     <div class="block">Net</div>
   </div>
 
   <script>
     const textContainer = document.getElementById('textContainer');
-    const blocks = document.querySelectorAll('.block');
-
-    let isVertical = window.innerHeight > window.innerWidth;
+    const ioBlock = document.getElementById('ioBlock');
 
     function animateText() {
-      const direction = isVertical ? 'translateY' : 'translateX';
+      const orientation = window.innerWidth > window.innerHeight ? 'horizontal' : 'vertical';
+      const blocks = document.querySelectorAll('.block');
 
       blocks.forEach((block, index) => {
-        const distance = index * 100;
-        block.style.transform = `${direction}(-${distance}%)`;
-      });
+        let transformValue = '';
 
-      isVertical = !isVertical;
+        if (orientation === 'vertical') {
+          transformValue = `translateY(${index * 100}%)`;
+        } else {
+          transformValue = `translateX(${index * 100}%)`;
+        }
+
+        block.style.transform = transformValue;
+      });
     }
 
-    animateText(); // Iniciar animación al cargar la página
-    setInterval(animateText, 5000); // Cambiar la animación cada 5 segundos
+    window.addEventListener('resize', animateText);
+    animateText(); // Ejecutar la animación al cargar la página
   </script>
 </body>
 </html>
