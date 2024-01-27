@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página Colorida</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0; /* Fondo poco brillante */
+      color: #333; /* Color de texto */
+    }
+
+    #container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    #textContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: moveText 5s linear infinite;
+    }
+
+    @keyframes moveText {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      25%, 75% {
+        transform: translateY(100%);
+      }
+    }
+
+    @media (orientation: portrait) {
+      #textContainer {
+        writing-mode: vertical-lr;
+      }
+    }
+
+    @media (orientation: landscape) {
+      #textContainer {
+        writing-mode: horizontal-tb;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <div id="textContainer">
+      <p>Web</p>
+      <p>:-:</p>
+      <p>IO</p>
+      <p>:-:</p>
+      <p>Net</p>
+    </div>
+  </div>
+</body>
+</html>
