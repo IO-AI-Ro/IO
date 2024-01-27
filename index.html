@@ -3,66 +3,102 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web:-:IO:-:Net</title>
   <style>
     body {
       margin: 0;
       overflow: hidden;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0; /* Fondo colorido poco brillante */
+      color: #333; /* Color de texto */
+    }
+
+    #container {
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      background-color: #f0f0f0; /* Fondo poco brillante */
-      color: #333; /* Color del texto */
-      font-family: Arial, sans-serif;
-    }
-
-    #textContainer {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      white-space: nowrap;
-      font-size: 2em;
     }
 
     .block {
-      margin: 0 5px;
+      display: inline-block;
+      font-size: 2em;
+      margin: 0 10px;
+      white-space: nowrap;
       transition: transform 1s ease-in-out;
+    }
+
+    #centerBlock {
+      color: #007bff; /* Color para el bloque central */
+      font-weight: bold;
+    }
+
+    @media (orientation: portrait) {
+      #container {
+        flex-direction: column;
+      }
+
+      .block {
+        transform-origin: top center;
+      }
+
+      #centerBlock {
+        transform: scale(1);
+      }
+
+      .block:nth-child(1), .block:nth-child(3) {
+        transform: translateY(-100%);
+      }
+    }
+
+    @media (orientation: landscape) {
+      .block {
+        transform-origin: left center;
+      }
+
+      #centerBlock {
+        transform: scale(1);
+      }
+
+      .block:nth-child(2) {
+        transform: translateX(-100%);
+      }
+
+      .block:nth-child(4) {
+        transform: translateX(100%);
+      }
     }
   </style>
 </head>
 <body>
-  <div id="textContainer">
+  <div id="container">
     <div class="block">Web</div>
     <div class="block">:-:</div>
-    <div class="block" id="ioBlock">IO</div>
+    <div id="centerBlock" class="block">IO</div>
     <div class="block">:-:</div>
     <div class="block">Net</div>
   </div>
 
   <script>
-    const textContainer = document.getElementById('textContainer');
-    const ioBlock = document.getElementById('ioBlock');
+    const blocks = document.querySelectorAll('.block');
+    let currentIndex = 0;
 
-    function animateText() {
-      const orientation = window.innerWidth > window.innerHeight ? 'horizontal' : 'vertical';
-      const blocks = document.querySelectorAll('.block');
-
+    function moveBlocks() {
       blocks.forEach((block, index) => {
-        let transformValue = '';
-
-        if (orientation === 'vertical') {
-          transformValue = `translateY(${index * 100}%)`;
-        } else {
-          transformValue = `translateX(${index * 100}%)`;
+        if (index !== 2) {
+          block.style.transform = `translate${currentIndex % 2 === 0 ? 'Y' : 'X'}(-${currentIndex * 100}%)`;
         }
-
-        block.style.transform = transformValue;
       });
+
+      currentIndex++;
+
+      if (currentIndex === blocks.length) {
+        currentIndex = 0;
+      }
+
+      requestAnimationFrame(moveBlocks);
     }
 
-    window.addEventListener('resize', animateText);
-    animateText(); // Ejecutar la animación al cargar la página
+    moveBlocks();
   </script>
 </body>
 </html>
