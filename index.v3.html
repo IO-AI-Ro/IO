@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #f0f0f0; /* Fondo colorido poco brillante */
+      font-family: Arial, sans-serif;
+      color: #333; /* Color del texto */
+    }
+
+    #textContainer {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      font-size: 2vw; /* Tamaño de texto ajustado a la ventana */
+      display: flex;
+    }
+
+    .block {
+      margin: 0 1vw; /* Espaciado entre bloques */
+      transition: transform 1s ease-in-out;
+    }
+
+    @media (orientation: portrait) {
+      #textContainer {
+        flex-direction: column;
+      }
+    }
+
+    @media (orientation: landscape) {
+      #textContainer {
+        flex-direction: row;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="textContainer">
+    <div class="block">Web</div>
+    <div class="block">:-:</div>
+    <div class="block">IO</div>
+    <div class="block">:-:</div>
+    <div class="block">Net</div>
+  </div>
+
+  <script>
+    const textContainer = document.getElementById('textContainer');
+    const blocks = document.querySelectorAll('.block');
+
+    let isVertical = window.innerHeight > window.innerWidth;
+
+    function animateText() {
+      const direction = isVertical ? 'translateY' : 'translateX';
+
+      blocks.forEach((block, index) => {
+        const distance = index * 100;
+        block.style.transform = `${direction}(-${distance}%)`;
+      });
+
+      isVertical = !isVertical;
+    }
+
+    animateText(); // Iniciar animación al cargar la página
+    setInterval(animateText, 5000); // Cambiar la animación cada 5 segundos
+  </script>
+</body>
+</html>
