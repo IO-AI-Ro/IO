@@ -2,65 +2,54 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página Colorida</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
     body {
       margin: 0;
       padding: 0;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0; /* Fondo poco brillante */
-      color: #333; /* Color de texto */
-    }
-
-    #container {
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      overflow: hidden;
+      background-color: #e6e6e6; /* Fondo poco brillante */
     }
 
-    #textContainer {
+    .text-container {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+      color: #333; /* Color de texto oscuro */
+    }
+
+    .text-container.horizontal {
+      flex-direction: row;
+    }
+
+    .text {
+      display: inline-block;
       animation: moveText 5s linear infinite;
     }
 
     @keyframes moveText {
-      0%, 100% {
-        transform: translateY(0);
+      0% {
+        transform: translateX(100%);
       }
-      25%, 75% {
-        transform: translateY(100%);
-      }
-    }
-
-    @media (orientation: portrait) {
-      #textContainer {
-        writing-mode: vertical-lr;
-      }
-    }
-
-    @media (orientation: landscape) {
-      #textContainer {
-        writing-mode: horizontal-tb;
+      100% {
+        transform: translateX(-100%);
       }
     }
   </style>
 </head>
 <body>
-  <div id="container">
-    <div id="textContainer">
-      <p>Web</p>
-      <p>:-:</p>
-      <p>IO</p>
-      <p>:-:</p>
-      <p>Net</p>
-    </div>
+  <div class="text-container">
+    <div class="text">Web</div>
+    <div class="text">:-:</div>
+    <div class="text">IO</div>
+    <div class="text">:-:</div>
+    <div class="text">Net</div>
   </div>
 </body>
 </html>
