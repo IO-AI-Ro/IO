@@ -1,76 +1,93 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      background-color: #f0f0f0; /* Fondo colorido poco brillante */
-      color: #333; /* Color del texto */
-      font-family: Arial, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #f0f0f0; /* Fondo poco brillante */
+            color: #333; /* Color de texto oscuro */
+            font-family: Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
 
-    #container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-    }
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .block {
-      position: absolute;
-      font-size: 2rem;
-      font-weight: bold;
-      transition: transform 5s linear infinite;
-    }
+        .block {
+            position: absolute;
+            width: 100px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            font-size: 20px;
+            border-radius: 5px;
+        }
 
-    #web { color: #3498db; } /* Azul */
-    #io { color: #e74c3c; } /* Rojo */
-    #net { color: #27ae60; } /* Verde */
+        #web { background-color: #3498db; color: #fff; }
+        #io { background-color: #2ecc71; color: #fff; }
+        #net { background-color: #e74c3c; color: #fff; }
 
-    /* Bloque central (IO) */
-    #io {
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
-    }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
 
-    /* Otros bloques */
-    #web { transform: rotate(0deg) translate(150px) rotate(0deg); }
-    #net { transform: rotate(120deg) translate(150px) rotate(-120deg); }
+        .block.rotate-web { animation: rotate 10s linear infinite; }
+        .block.rotate-io { animation: rotate 15s linear infinite; }
+        .block.rotate-net { animation: rotate 20s linear infinite; }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const ioBlock = document.getElementById("io");
+            const webBlock = document.getElementById("web");
+            const netBlock = document.getElementById("net");
 
-  </style>
+            const rotateAroundIO = (block, angle) => {
+                const ioRect = ioBlock.getBoundingClientRect();
+                const ioCenterX = ioRect.left + ioRect.width / 2;
+                const ioCenterY = ioRect.top + ioRect.height / 2;
+
+                const radius = 150; // Distancia desde el centro de IO
+
+                const x = ioCenterX + radius * Math.cos(angle);
+                const y = ioCenterY + radius * Math.sin(angle);
+
+                block.style.left = x - block.offsetWidth / 2 + "px";
+                block.style.top = y - block.offsetHeight / 2 + "px";
+            };
+
+            let angle = 0;
+
+            const animateBlocks = () => {
+                rotateAroundIO(webBlock, angle);
+                rotateAroundIO(netBlock, angle + Math.PI); // Rotación opuesta
+                angle += 0.005; // Ajusta la velocidad de rotación
+                requestAnimationFrame(animateBlocks);
+            };
+
+            animateBlocks();
+        });
+    </script>
 </head>
 <body>
-  <div id="container">
-    <div id="web" class="block">Web</div>
-    <div id="io" class="block">:-:</div>
-    <div id="net" class="block">Net</div>
-  </div>
-
-  <script>
-    // Script opcional para mover los bloques en círculos alrededor de [IO]
-    const container = document.getElementById('container');
-    const blocks = document.querySelectorAll('.block');
-
-    let angle = 0;
-
-    function moveBlocks() {
-      angle += 0.005;
-
-      blocks.forEach((block, index) => {
-        const radius = 150;
-        const x = Math.cos(angle * index) * radius;
-        const y = Math.sin(angle * index) * radius;
-
-        block.style.transform = `translate(${x}px, ${y}px)`;
-      });
-
-      requestAnimationFrame(moveBlocks);
-    }
-
-    moveBlocks();
-  </script>
+    <div class="container">
+        <div id="web" class="block rotate-web">Web</div>
+        <div class="block" id="separator1">:-:</div>
+        <div id="io" class="block rotate-io">IO</div>
+        <div class="block" id="separator2">:-:</div>
+        <div id="net" class="block rotate-net">Net</div>
+    </div>
 </body>
 </html>
