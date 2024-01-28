@@ -7,54 +7,69 @@
     body {
       margin: 0;
       overflow: hidden;
-      background-color: #f5f5f5; /* Fondo colorido poco brillante */
-      color: #333;
       font-family: Arial, sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+      background-color: #f0f0f0; /* Fondo colorido poco brillante */
+      color: #333; /* Color de texto */
     }
 
-    .container {
+    #container {
       position: relative;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
     }
 
     .block {
       position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 2em;
-      animation: moveAround 6s linear infinite; /* 6s para completar un círculo en 1 vuelta */
-    }
-
-    #io {
-      font-size: 4em;
-      font-weight: bold;
+      border-radius: 5px;
+      background-color: rgba(255, 255, 255, 0.8); /* Fondo de bloques */
+      padding: 10px;
+      transition: transform 2s linear infinite; /* Animación de rotación */
     }
 
     #web {
-      animation-delay: -2s; /* Inicia la animación 2 segundos antes para mantener la sincronización */
+      top: 50%;
+      left: 5%;
+      transform-origin: center 150%;
+    }
+
+    #io {
+      top: 50%;
+      left: 50%;
+      transform-origin: center;
+      background-color: #3498db; /* Color de fondo del bloque IO */
+      color: #fff; /* Color de texto del bloque IO */
     }
 
     #net {
-      animation-delay: -4s; /* Inicia la animación 4 segundos antes para mantener la sincronización */
-    }
-
-    @keyframes moveAround {
-      to {
-        transform: rotate(360deg);
-      }
+      top: 50%;
+      left: 95%;
+      transform-origin: center -50%;
     }
   </style>
-  <title>Web:-:IO:-:Net</title>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const io = document.getElementById('io');
+      const blocks = document.querySelectorAll('.block');
+
+      setInterval(() => {
+        blocks.forEach(block => {
+          if (block !== io) {
+            const angle = parseFloat(block.style.transform.replace('rotate(', '').replace('deg)', '')) || 0;
+            block.style.transform = `rotate(${angle + 1}deg)`;
+          }
+        });
+      }, 10);
+    });
+  </script>
 </head>
 <body>
-  <div class="container">
+  <div id="container">
     <div id="web" class="block">Web</div>
-    <div class="block">:-:</div>
     <div id="io" class="block">IO</div>
-    <div class="block">:-:</div>
     <div id="net" class="block">Net</div>
   </div>
 </body>
