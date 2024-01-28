@@ -3,67 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Animación Web:-:IO:-:Net</title>
+  <title>Web:-:IO:-:Net</title>
   <style>
     body {
       margin: 0;
       overflow: hidden;
-      background-color: #f0f0f0; /* Fondo poco brillante */
-      color: #333; /* Color de texto */
-      font-family: Arial, sans-serif;
+      background-color: #f0f0f0; /* Fondo colorido poco brillante */
+      color: #333; /* Color del texto */
+      font-family: 'Arial', sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100vh;
     }
 
-    .container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    #container {
+      position: relative;
     }
 
     .block {
+      position: absolute;
       font-size: 3em;
-      margin: 0 10px;
-      animation: moveInCircle 5s linear infinite;
+      animation: moveInCircle linear infinite 5s;
     }
 
-    .center-block {
-      font-size: 3em;
-      margin: 0 10px;
+    #io {
+      font-weight: bold;
     }
+
+    #web { animation-delay: 1s; }
+    #net { animation-delay: 2s; }
 
     @keyframes moveInCircle {
-      0% {
-        transform: translate(100px, 0);
-      }
-      25% {
-        transform: translate(0, 100px);
-      }
-      50% {
-        transform: translate(-100px, 0);
-      }
-      75% {
-        transform: translate(0, -100px);
-      }
-      100% {
-        transform: translate(100px, 0);
-      }
+      0% { transform: translate(0, -50%) rotate(0deg); }
+      25% { transform: translate(50%, 0) rotate(90deg); }
+      50% { transform: translate(0, 50%) rotate(180deg); }
+      75% { transform: translate(-50%, 0) rotate(270deg); }
+      100% { transform: translate(0, -50%) rotate(360deg); }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="block">Web</div>
-    <div class="block">:-:</div>
-    <div class="center-block">IO</div>
-    <div class="block">:-:</div>
-    <div class="block">Net</div>
+  <div id="container">
+    <div class="block" id="web">Web</div>
+    <div class="block" id="separator1">:-:</div>
+    <div class="block" id="io">IO</div>
+    <div class="block" id="separator2">:-:</div>
+    <div class="block" id="net">Net</div>
   </div>
 
   <script>
-    // Puedes agregar scripts JS adicionales aquí si es necesario
+    // Ajustar tamaño de ventana
+    window.addEventListener('resize', () => {
+      document.getElementById('container').style.height = window.innerHeight + 'px';
+    });
   </script>
 </body>
 </html>
