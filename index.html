@@ -3,66 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página Colorida</title>
+  <title>Animación Web:-:IO:-:Net</title>
   <style>
     body {
       margin: 0;
       overflow: hidden;
       background-color: #f0f0f0; /* Fondo poco brillante */
-      color: #333; /* Color de texto oscuro */
-      font-size: 2em; /* Tamaño del texto grande */
+      color: #333; /* Color de texto */
+      font-family: Arial, sans-serif;
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      transition: background-color 0.5s, color 0.5s; /* Animación de transición suave */
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .block {
-      display: inline-block;
-      transition: transform 0.5s; /* Animación de transición suave */
+      font-size: 3em;
+      margin: 0 10px;
+      animation: moveInCircle 5s linear infinite;
     }
 
-    #io {
-      color: #ff6600; /* Color de texto naranja para el bloque IO (centro) */
-      transform: scale(1.2); /* Bloque central más grande */
+    .center-block {
+      font-size: 3em;
+      margin: 0 10px;
+    }
+
+    @keyframes moveInCircle {
+      0% {
+        transform: translate(100px, 0);
+      }
+      25% {
+        transform: translate(0, 100px);
+      }
+      50% {
+        transform: translate(-100px, 0);
+      }
+      75% {
+        transform: translate(0, -100px);
+      }
+      100% {
+        transform: translate(100px, 0);
+      }
     }
   </style>
 </head>
 <body>
-  <div id="web" class="block">Web</div>
-  <div class="block">:-:</div>
-  <div id="io" class="block">IO</div>
-  <div class="block">:-:</div>
-  <div id="net" class="block">Net</div>
+  <div class="container">
+    <div class="block">Web</div>
+    <div class="block">:-:</div>
+    <div class="center-block">IO</div>
+    <div class="block">:-:</div>
+    <div class="block">Net</div>
+  </div>
 
   <script>
-    window.addEventListener('resize', updateBlockSize);
-
-    function updateBlockSize() {
-      const windowWidth = window.innerWidth;
-      const blockSize = windowWidth / 15; /* Ajusta el tamaño de los bloques según el ancho de la ventana */
-
-      document.querySelectorAll('.block').forEach(block => {
-        block.style.fontSize = `${blockSize}px`;
-      });
-    }
-
-    window.addEventListener('scroll', updateBlockPosition);
-
-    function updateBlockPosition() {
-      const scrollPosition = window.scrollY;
-
-      document.querySelectorAll('.block:not(#io)').forEach((block, index) => {
-        const offset = index * 50; /* Espacio entre bloques */
-        const translateY = scrollPosition / 3 + offset;
-        block.style.transform = `translateY(${translateY}px)`;
-      });
-    }
-
-    // Llama a las funciones de actualización al cargar la página
-    updateBlockSize();
-    updateBlockPosition();
+    // Puedes agregar scripts JS adicionales aquí si es necesario
   </script>
 </body>
 </html>
