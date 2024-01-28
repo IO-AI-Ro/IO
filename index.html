@@ -3,92 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web:-:IO:-:Net</title>
+  <title>Página Colorida</title>
   <style>
     body {
       margin: 0;
       overflow: hidden;
-      background-color: #f5f5f5; /* Fondo poco brillante */
-      color: #333; /* Color de texto */
-      font-family: Arial, sans-serif;
+      background-color: #f0f0f0; /* Fondo poco brillante */
+      color: #333; /* Color de texto oscuro */
+      font-size: 2em; /* Tamaño del texto grande */
       display: flex;
       align-items: center;
       justify-content: center;
       height: 100vh;
-      transition: background-color 0.5s ease;
-    }
-
-    .container {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      white-space: nowrap;
-      font-size: 2em;
+      transition: background-color 0.5s, color 0.5s; /* Animación de transición suave */
     }
 
     .block {
       display: inline-block;
-      margin: 0 10px;
+      transition: transform 0.5s; /* Animación de transición suave */
     }
 
-    @media (orientation: portrait) {
-      .container {
-        flex-direction: column;
-      }
-
-      .block {
-        animation: moveVertical 3s infinite;
-      }
-    }
-
-    @media (orientation: landscape) {
-      .block {
-        animation: moveHorizontal 3s infinite;
-      }
-    }
-
-    @keyframes moveVertical {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      25% {
-        transform: translateY(-100%);
-      }
-      50% {
-        transform: translateY(-200%);
-      }
-      75% {
-        transform: translateY(-300%);
-      }
-    }
-
-    @keyframes moveHorizontal {
-      0%, 100% {
-        transform: translateX(0);
-      }
-      25% {
-        transform: translateX(100%);
-      }
-      50% {
-        transform: translateX(200%);
-      }
-      75% {
-        transform: translateX(300%);
-      }
+    #io {
+      color: #ff6600; /* Color de texto naranja para el bloque IO (centro) */
+      transform: scale(1.2); /* Bloque central más grande */
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="block">Web</div>
-    <div class="block">:-:</div>
-    <div class="block">IO</div>
-    <div class="block">:-:</div>
-    <div class="block">Net</div>
-  </div>
+  <div id="web" class="block">Web</div>
+  <div class="block">:-:</div>
+  <div id="io" class="block">IO</div>
+  <div class="block">:-:</div>
+  <div id="net" class="block">Net</div>
 
   <script>
-    // Puedes agregar scripts adicionales aquí si es necesario
+    window.addEventListener('resize', updateBlockSize);
+
+    function updateBlockSize() {
+      const windowWidth = window.innerWidth;
+      const blockSize = windowWidth / 15; /* Ajusta el tamaño de los bloques según el ancho de la ventana */
+
+      document.querySelectorAll('.block').forEach(block => {
+        block.style.fontSize = `${blockSize}px`;
+      });
+    }
+
+    window.addEventListener('scroll', updateBlockPosition);
+
+    function updateBlockPosition() {
+      const scrollPosition = window.scrollY;
+
+      document.querySelectorAll('.block:not(#io)').forEach((block, index) => {
+        const offset = index * 50; /* Espacio entre bloques */
+        const translateY = scrollPosition / 3 + offset;
+        block.style.transform = `translateY(${translateY}px)`;
+      });
+    }
+
+    // Llama a las funciones de actualización al cargar la página
+    updateBlockSize();
+    updateBlockPosition();
   </script>
 </body>
 </html>
