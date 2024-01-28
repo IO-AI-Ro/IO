@@ -41,35 +41,31 @@
             color: #fff;
         }
 
-        #divider {
+        #divider1, #divider2 {
             font-size: 1.5em;
             padding: 0 10px;
+            position: absolute;
         }
+
+        #web { animation-delay: -0.5s; }
+        #net { animation-delay: -1s; }
 
         @keyframes orbit {
             0% {
-                transform: rotate(0deg) translateX(200px) rotate(0deg);
+                transform: rotate(0deg) translateX(100px) rotate(0deg);
             }
             100% {
-                transform: rotate(360deg) translateX(200px) rotate(-360deg);
+                transform: rotate(360deg) translateX(100px) rotate(-360deg);
             }
-        }
-
-        #web {
-            animation-delay: -1s;
-        }
-
-        #net {
-            animation-delay: -2s;
         }
     </style>
 </head>
 <body>
     <div id="container">
         <div id="web" class="block">Web</div>
-        <span id="divider">:-:</span>
+        <span id="divider1">:-:</span>
         <div id="io" class="block">IO</div>
-        <span id="divider">:-:</span>
+        <span id="divider2">:-:</span>
         <div id="net" class="block">Net</div>
     </div>
 
