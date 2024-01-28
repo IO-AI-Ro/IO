@@ -3,60 +3,74 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Web:-:IO:-:Net</title>
   <style>
     body {
       margin: 0;
       overflow: hidden;
       background-color: #f0f0f0; /* Fondo colorido poco brillante */
       color: #333; /* Color del texto */
-      font-family: 'Arial', sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+      font-family: Arial, sans-serif;
     }
 
     #container {
       position: relative;
+      width: 100vw;
+      height: 100vh;
     }
 
     .block {
       position: absolute;
-      font-size: 3em;
-      animation: moveInCircle linear infinite 5s;
-    }
-
-    #io {
+      font-size: 2rem;
       font-weight: bold;
+      transition: transform 5s linear infinite;
     }
 
-    #web { animation-delay: 1s; }
-    #net { animation-delay: 2s; }
+    #web { color: #3498db; } /* Azul */
+    #io { color: #e74c3c; } /* Rojo */
+    #net { color: #27ae60; } /* Verde */
 
-    @keyframes moveInCircle {
-      0% { transform: translate(0, -50%) rotate(0deg); }
-      25% { transform: translate(50%, 0) rotate(90deg); }
-      50% { transform: translate(0, 50%) rotate(180deg); }
-      75% { transform: translate(-50%, 0) rotate(270deg); }
-      100% { transform: translate(0, -50%) rotate(360deg); }
+    /* Bloque central (IO) */
+    #io {
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
     }
+
+    /* Otros bloques */
+    #web { transform: rotate(0deg) translate(150px) rotate(0deg); }
+    #net { transform: rotate(120deg) translate(150px) rotate(-120deg); }
+
   </style>
 </head>
 <body>
   <div id="container">
-    <div class="block" id="web">Web</div>
-    <div class="block" id="separator1">:-:</div>
-    <div class="block" id="io">IO</div>
-    <div class="block" id="separator2">:-:</div>
-    <div class="block" id="net">Net</div>
+    <div id="web" class="block">Web</div>
+    <div id="io" class="block">:-:</div>
+    <div id="net" class="block">Net</div>
   </div>
 
   <script>
-    // Ajustar tamaño de ventana
-    window.addEventListener('resize', () => {
-      document.getElementById('container').style.height = window.innerHeight + 'px';
-    });
+    // Script opcional para mover los bloques en círculos alrededor de [IO]
+    const container = document.getElementById('container');
+    const blocks = document.querySelectorAll('.block');
+
+    let angle = 0;
+
+    function moveBlocks() {
+      angle += 0.005;
+
+      blocks.forEach((block, index) => {
+        const radius = 150;
+        const x = Math.cos(angle * index) * radius;
+        const y = Math.sin(angle * index) * radius;
+
+        block.style.transform = `translate(${x}px, ${y}px)`;
+      });
+
+      requestAnimationFrame(moveBlocks);
+    }
+
+    moveBlocks();
   </script>
 </body>
 </html>
