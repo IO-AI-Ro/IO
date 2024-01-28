@@ -1,55 +1,61 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            background-color: #f5f5f5; /* Fondo colorido poco brillante */
-            color: #333; /* Color del texto */
-            font-family: 'Arial', sans-serif;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #f5f5f5; /* Fondo colorido poco brillante */
+      color: #333;
+      font-family: Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
 
-        .container {
-            position: relative;
-        }
+    .container {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
 
-        .block {
-            display: inline-block;
-            font-size: 2em;
-            padding: 0 10px;
-            white-space: nowrap;
-            animation: rotate 6s linear infinite; /* Animación de rotación */
-        }
+    .block {
+      position: absolute;
+      font-size: 2em;
+      animation: moveAround 6s linear infinite; /* 6s para completar un círculo en 1 vuelta */
+    }
 
-        .io {
-            font-weight: bold;
-            color: #007bff; /* Color del bloque IO */
-        }
+    #io {
+      font-size: 4em;
+      font-weight: bold;
+    }
 
-        @keyframes rotate {
-            0% { transform: translateX(100px) rotate(0deg); }
-            25% { transform: translateX(100px) rotate(90deg); }
-            50% { transform: translateX(100px) rotate(180deg); }
-            75% { transform: translateX(100px) rotate(270deg); }
-            100% { transform: translateX(100px) rotate(360deg); }
-        }
-    </style>
-    <title>Página Colorida</title>
+    #web {
+      animation-delay: -2s; /* Inicia la animación 2 segundos antes para mantener la sincronización */
+    }
+
+    #net {
+      animation-delay: -4s; /* Inicia la animación 4 segundos antes para mantener la sincronización */
+    }
+
+    @keyframes moveAround {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+  <title>Web:-:IO:-:Net</title>
 </head>
 <body>
-    <div class="container">
-        <div class="block">Web</div>
-        <div class="block">:-:</div>
-        <div class="block io">IO</div>
-        <div class="block">:-:</div>
-        <div class="block">Net</div>
-    </div>
+  <div class="container">
+    <div id="web" class="block">Web</div>
+    <div class="block">:-:</div>
+    <div id="io" class="block">IO</div>
+    <div class="block">:-:</div>
+    <div id="net" class="block">Net</div>
+  </div>
 </body>
 </html>
