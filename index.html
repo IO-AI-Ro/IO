@@ -1,76 +1,74 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      margin: 0;
-      overflow: hidden;
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0; /* Fondo colorido poco brillante */
-      color: #333; /* Color de texto */
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #f0f0f0; /* Fondo colorido poco brillante */
+            color: #333;
+            font-family: Arial, sans-serif;
+        }
 
-    #container {
-      position: relative;
-      width: 100vw;
-      height: 100vh;
-    }
+        .container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-    .block {
-      position: absolute;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2em;
-      border-radius: 5px;
-      background-color: rgba(255, 255, 255, 0.8); /* Fondo de bloques */
-      padding: 10px;
-      transition: transform 2s linear infinite; /* Animación de rotación */
-    }
+        .block {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background-color: #3498db; /* Color de fondo para los bloques Web y Net */
+        }
 
-    #web {
-      top: 50%;
-      left: 5%;
-      transform-origin: center 150%;
-    }
+        #ioBlock {
+            background-color: #e74c3c; /* Color de fondo para el bloque IO */
+        }
 
-    #io {
-      top: 50%;
-      left: 50%;
-      transform-origin: center;
-      background-color: #3498db; /* Color de fondo del bloque IO */
-      color: #fff; /* Color de texto del bloque IO */
-    }
+        #webBlock {
+            transform: translate(200px, 0);
+        }
 
-    #net {
-      top: 50%;
-      left: 95%;
-      transform-origin: center -50%;
-    }
-  </style>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const io = document.getElementById('io');
-      const blocks = document.querySelectorAll('.block');
+        #netBlock {
+            transform: translate(-200px, 0);
+        }
 
-      setInterval(() => {
-        blocks.forEach(block => {
-          if (block !== io) {
-            const angle = parseFloat(block.style.transform.replace('rotate(', '').replace('deg)', '')) || 0;
-            block.style.transform = `rotate(${angle + 1}deg)`;
-          }
-        });
-      }, 10);
-    });
-  </script>
+        #colonBlock {
+            transform: translate(0, -200px);
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .block {
+            animation: rotate 6s linear infinite;
+        }
+    </style>
 </head>
 <body>
-  <div id="container">
-    <div id="web" class="block">Web</div>
-    <div id="io" class="block">IO</div>
-    <div id="net" class="block">Net</div>
-  </div>
+    <div class="container">
+        <div id="webBlock" class="block">Web</div>
+        <div id="colonBlock" class="block">:-:</div>
+        <div id="ioBlock" class="block">IO</div>
+        <div id="colonBlock" class="block">:-:</div>
+        <div id="netBlock" class="block">Net</div>
+    </div>
 </body>
 </html>
