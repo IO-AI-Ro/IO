@@ -1,2 +1,2 @@
-# Ostwald Network Live #
-...
+# 🔰༄☾💡Network ⚙️ Live 🌳 ☽︎༄🔰 #
+🔰༄☾︎💡 Red de la Vida 🌳☽︎༄🔰
