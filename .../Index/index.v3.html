@@ -1,1 +1,94 @@
-.
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>༄𝓝𝓮𝓽𝔀𝓸𝓻𝓴 𝓛𝓲𝓿𝓮</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #00CDCD;
+            background-image: url("NetLive.Background2.IMG");
+            background-size: cover;
+        }
+
+        #container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .block {
+            position: absolute;
+            width: 80px;
+            height: 80px;
+            line-height: 80px;
+            text-align: center;
+
+            font-weight: bold;
+            text-align: center;
+            border-radius: 50%;
+            animation: orbit 4s linear infinite;
+        }
+
+        #net, #live, #space {            
+            color: #D9E2E2;
+        }
+
+        #net {
+            background-color: #3498db;
+            font-size: 2em;
+        }
+
+        #live {
+            background-color: #2ecc71;
+            font-size: 1.75em;
+        }
+
+        #space {
+            background-color: #730073;
+            font-size: 1.25em;
+        }
+
+        .divider {
+            position: absolute;
+            width: 185px;
+            height: 185px;
+            border-radius: 50%;
+            background-image: url("NetworkLive.IMG");
+            background-size: cover;
+            background-position: center;
+        }
+
+        #net { animation-delay: 1.33s; }
+        #live { animation-delay: 2.66s; }
+        #space { animation-delay: 3.99s; }
+
+        @keyframes orbit {
+            0% {
+                transform: rotate(0deg) translateX(135px) rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg) translateX(135px) rotate(-360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="space" class="block">Space</div>
+        <div id="live" class="block">Live</div>
+        <div id="net" class="block">Net</div>
+        <div class="divider"></div>
+        <t>༄𝓝𝓮𝓽𝔀𝓸𝓻𝓴 𝓛𝓲𝓿𝓮</t>
+    </div>
+
+    <script>
+        // Optional JavaScript code can go here
+    </script>
+</body>
+</html>
