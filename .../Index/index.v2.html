@@ -1,1 +1,80 @@
-.
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f0f0f0; /* Fondo poco brillante */
+            color: #333; /* Color de texto */
+            font-family: Arial, sans-serif;
+        }
+
+        #textContainer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            white-space: nowrap;
+            font-size: 24px;
+        }
+
+        #textContainer.vertical {
+            writing-mode: vertical-rl; /* Orientación vertical */
+            text-orientation: mixed;
+        }
+
+        #textContainer.horizontal {
+            writing-mode: horizontal-tb; /* Orientación horizontal */
+        }
+    </style>
+</head>
+<body>
+    <div id="textContainer" class="vertical">
+        <span>Web</span>
+        <span>:-:</span>
+        <span>IO</span>
+        <span>:-:</span>
+        <span>Net</span>
+    </div>
+
+    <script>
+        // Detectar la orientación al cargar la página
+        const textContainer = document.getElementById('textContainer');
+        const isVertical = window.innerHeight > window.innerWidth;
+
+        // Aplicar la clase correspondiente
+        if (isVertical) {
+            textContainer.classList.add('vertical');
+        } else {
+            textContainer.classList.add('horizontal');
+        }
+
+        // Animación
+        const spans = document.querySelectorAll('#textContainer span');
+
+        let animationIndex = 0;
+        let animationDirection = 1;
+
+        function animateText() {
+            spans[animationIndex].style.opacity = '1';
+            setTimeout(() => {
+                spans[animationIndex].style.opacity = '0';
+                animationIndex += animationDirection;
+
+                if (animationIndex >= spans.length || animationIndex < 0) {
+                    animationDirection *= -1;
+                    animationIndex += animationDirection * 2;
+                }
+
+                animateText();
+            }, 1000);
+        }
+
+        animateText();
+    </script>
+</body>
+</html>
