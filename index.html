@@ -35,7 +35,7 @@
             animation: orbit 4s linear infinite;
         }
 
-        #net, #live, #space {            
+        #net, #live, #space, #matter {            
             color: #D9E2E2;
         }
 
@@ -50,8 +50,13 @@
         }
 
         #space {
-            background-color: #730073;
+            background-color: #8A8A8A;
             font-size: 1.25em;
+        }
+
+        #matter {
+            background-color: #C0C0C0;
+            font-size: 0.5em;
         }
         
         .divider {
@@ -64,9 +69,10 @@
             background-position: center;
         }
 
-        #net { animation-delay: 1.33s; }
-        #live { animation-delay: 2.66s; }
-        #space { animation-delay: 3.99s; }
+        #net { animation-delay: 1s; }
+        #live { animation-delay: 2s; }
+        #space { animation-delay: 3s; }
+        #matter { animation-delay: 4s; }
 
         @keyframes orbit {
             0% {
@@ -80,6 +86,7 @@
 </head>
 <body>
     <div id="container">
+        <div id="matter" class="block">Matter</div>
         <div id="space" class="block">Space</div>
         <div id="live" class="block">Live</div>
         <div id="net" class="block">Net</div>
